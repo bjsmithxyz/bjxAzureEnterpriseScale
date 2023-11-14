@@ -169,7 +169,7 @@ Use this module if you do not want to grant Tenant Root Management Group Deploym
 # For Azure global regions
 dateYMD=$(date +%Y%m%dT%H%M%S%NZ)
 NAME="alz-MGDeployment-${dateYMD}"
-LOCATION="eastus"
+LOCATION="australiasoutheast"
 TEMPLATEFILE="infra-as-code/bicep/modules/managementGroups/managementGroupsScopeEscape.bicep"
 PARAMETERS="@infra-as-code/bicep/modules/managementGroups/parameters/managementGroups.parameters.all.json"
 MGID="alz"
@@ -186,7 +186,7 @@ az deployment mg create --name $NAME --location $LOCATION --template-file $TEMPL
 
 $inputObject = @{
   DeploymentName        = 'alz-MGDeployment-{0}' -f (-join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-  Location              = 'EastUS'
+  Location              = 'AustraliaSouthEast'
   TemplateFile          = "infra-as-code/bicep/modules/managementGroups/managementGroups.bicep"
   TemplateParameterFile = 'infra-as-code/bicep/modules/managementGroups/parameters/managementGroups.parameters.all.json'
 }
@@ -202,7 +202,7 @@ Use this module if you do not want to grant Tenant Root Management Group Deploym
 
 $inputObject = @{
   DeploymentName        = 'alz-MGDeployment-{0}' -f (-join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-  Location              = 'EastUS'
+  Location              = 'AustraliaSouthEast'
   TemplateFile          = "infra-as-code/bicep/modules/managementGroups/managementGroupsScopeEscape.bicep"
   TemplateParameterFile = 'infra-as-code/bicep/modules/managementGroups/parameters/managementGroups.parameters.all.json'
   ManagementGroupId     = 'alz'
