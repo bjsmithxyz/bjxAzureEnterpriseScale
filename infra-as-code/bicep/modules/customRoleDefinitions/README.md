@@ -15,7 +15,6 @@ For example, if the `ManagementGroupId` = **alz**, then each role will have this
 ## Parameters
 
 - [Parameters for Azure Commercial Cloud](generateddocs/customRoleDefinitions.bicep.md)
-- [Parameters for Azure China Cloud](generateddocs/mc-customRoleDefinitions.bicep.md)
 
 ## Outputs
 
@@ -37,7 +36,6 @@ There are two different sets of deployment; one for deploying to Azure global re
  | Azure Cloud    | Bicep template                 | Input parameters file                             |
  | -------------- | ------------------------------ | ------------------------------------------------- |
  | Global regions | customRoleDefinitions.bicep    | parameters/customRoleDefinitions.parameters.all.json |
- | China regions  | mc-customRoleDefinitions.bicep | parameters/customRoleDefinitions.parameters.all.json |
 
 In this example, the custom roles will be deployed to the `alz` management group (the intermediate root management group).
 
@@ -51,35 +49,20 @@ Input parameter file `parameters/customRoleDefinitions.parameters.all.json` defi
 # For Azure global regions
 
 # Management Group ID
-MGID="alz"
+MGID="bjx"
 
 # Chosen Azure Region
-LOCATION="eastus"
+LOCATION="australiasoutheast"
 
 dateYMD=$(date +%Y%m%dT%H%M%S%NZ)
 NAME="alz-CustomRoleDefsDeployment-${dateYMD}"
 TEMPLATEFILE="infra-as-code/bicep/modules/customRoleDefinitions/customRoleDefinitions.bicep"
 PARAMETERS="@infra-as-code/bicep/modules/customRoleDefinitions/parameters/customRoleDefinitions.parameters.all.json"
 
-az deployment mg create --name ${NAME:0:63} --location $LOCATION --management-group-id $MGID --template-file $TEMPLATEFILE --parameters $PARAMETERS
+az deployment mg create --name $NAME --location $LOCATION --management-group-id $MGID --template-file $TEMPLATEFILE --parameters $PARAMETERS
 ```
 OR
 ```bash
-# For Azure China regions
-
-# Management Group ID
-MGID="alz"
-
-# Chosen Azure Region
-LOCATION="chinaeast2"
-
-dateYMD=$(date +%Y%m%dT%H%M%S%NZ)
-NAME="alz-CustomRoleDefsDeployment-${dateYMD}"
-TEMPLATEFILE="infra-as-code/bicep/modules/customRoleDefinitions/mc-customRoleDefinitions.bicep"
-PARAMETERS="@infra-as-code/bicep/modules/customRoleDefinitions/parameters/customRoleDefinitions.parameters.all.json"
-
-az deployment mg create --name ${NAME:0:63} --location $LOCATION --management-group-id $MGID --template-file $TEMPLATEFILE --parameters $PARAMETERS
-```
 
 ### PowerShell
 
