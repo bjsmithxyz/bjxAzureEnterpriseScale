@@ -179,39 +179,6 @@ MGID="alz"
 az deployment mg create --name $NAME --location $LOCATION --template-file $TEMPLATEFILE --parameters $PARAMETERS --management-group-id $MGID
 ```
 
-### PowerShell - `managementGroups.bicep`
-
-```powershell
-# For Azure global regions
-
-$inputObject = @{
-  DeploymentName        = 'alz-MGDeployment-{0}' -f (-join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-  Location              = 'AustraliaSouthEast'
-  TemplateFile          = "infra-as-code/bicep/modules/managementGroups/managementGroups.bicep"
-  TemplateParameterFile = 'infra-as-code/bicep/modules/managementGroups/parameters/managementGroups.parameters.all.json'
-}
-New-AzTenantDeployment @inputObject
-```
-
-### PowerShell - `managementGroupsScopeEscape.bicep`
-
-Use this module if you do not want to grant Tenant Root Management Group Deployment permissions.
-
-```powershell
-# For Azure global regions
-
-$inputObject = @{
-  DeploymentName        = 'alz-MGDeployment-{0}' -f (-join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-  Location              = 'AustraliaSouthEast'
-  TemplateFile          = "infra-as-code/bicep/modules/managementGroups/managementGroupsScopeEscape.bicep"
-  TemplateParameterFile = 'infra-as-code/bicep/modules/managementGroups/parameters/managementGroups.parameters.all.json'
-  ManagementGroupId     = 'alz'
-}
-New-AzManagementGroupDeployment @inputObject
-```
-
-![Example Deployment Output](media/exampleDeploymentOutput.png "Example Deployment Output")
-
 ## Bicep Visualizer
 
 ![Bicep Visualizer](media/bicepVisualizer.png "Bicep Visualizer")
